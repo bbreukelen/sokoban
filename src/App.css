@@ -1,0 +1,172 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background: aliceblue;
+}
+
+div.header {
+    position: absolute;
+    top: 0;
+    background: #37802e;
+    width: 100vw;
+    height: 50px;
+    font-size: 1.8em;
+    text-shadow: 0 0 15px #ffffff;
+    text-align: center;
+    box-sizing: border-box;
+    color: cornsilk;
+    line-height: 50px;
+    z-index: 100;
+}
+
+div.footer {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    background: lightblue;
+    height: 50px;
+    z-index: 100;
+}
+
+div.level {
+    display: inline-block;
+    align-self: center;
+    flex-basis: auto;
+    font-size: 5px;
+}
+
+/***** level contents *****/
+div.row {
+    display: block;
+    height: 10em;
+}
+
+div.item {
+    display: inline-block;
+    width: 10em;
+    height: 10em;
+}
+
+div.wall {
+    border: solid 1px #3d8081;
+    background: #3ca4a5;
+    box-sizing: border-box;
+    border-radius: 0.8em;
+}
+
+div.empty { }
+
+div.void {
+    background: green;
+    border: solid 3.4em aliceblue;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+div.player { }
+
+div.player img {
+    width: 10em;
+    height: 10em;
+}
+
+div.block {
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    background: rgb(149, 188, 224);
+    color: rgb(149, 188, 224);
+    border-radius: 6px;
+    opacity: 0.9;
+    box-shadow: 0 0 0 0.1em rgb(93, 131, 168) inset,
+    0 0 0 0.7em inset,
+    -1.08em -1.08em 0 rgb(109, 148, 184) inset,
+    -2.7em -2.7em 0 0.085em inset,
+    1.08em 1.08em 0 rgb(255, 255, 255) inset;
+}
+
+div.success {
+    background: rgb(153, 213, 124);
+    color: rgb(153, 213, 124);
+    box-shadow: 0 0 0 0.1em rgb(56, 132, 62) inset,
+    0 0 0 0.7em inset,
+    -1.08em -1.08em 0 rgb(68, 159, 75) inset,
+    -2.7em -2.7em 0 0.085em inset,
+    1.08em 1.08em 0 rgb(255, 255, 255) inset;
+}
+
+img.thumb {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 40vw;
+    transform: scale(0, 0);
+    animation: zoom-in-zoom-out 2s ease-in-out;
+}
+
+div.levelButton {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 2.4em;
+    color: #444444;
+    line-height: 60px;
+}
+
+div.levelButton.nextLevel {}
+div.levelButton.previousLevel {}
+
+div.restartButton {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin: 12px 0 0 10px;
+    cursor: pointer;
+    font-size: 1.8em;
+    color: red;
+}
+
+div.levelNum {
+    display: inline-block;
+    line-height: 50px;
+    font-weight: bold;
+    color: #444444;
+    min-width: 100px;
+    text-align: center;
+}
+
+div.space { display: inline-block; width: 50px; }
+
+@keyframes zoom-in-zoom-out {
+    0% {
+        transform: scale(0, 0);
+    }
+    50% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(0, 0);
+    }
+}
