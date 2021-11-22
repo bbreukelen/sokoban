@@ -42,11 +42,11 @@ class Level extends React.Component {
         window.removeEventListener("click", this.tapHandler.bind(this));
     }
 
-    keyHandler({key}) {
-        if (key === 'ArrowUp') this.move(0, -1);
-        if (key === 'ArrowDown') this.move(0, 1);
-        if (key === 'ArrowLeft') this.move(-1, 0);
-        if (key === 'ArrowRight') this.move(1, 0);
+    keyHandler(e) {
+        if (e.key === 'ArrowUp') this.move(0, -1, e.shiftKey);
+        if (e.key === 'ArrowDown') this.move(0, 1, e.shiftKey);
+        if (e.key === 'ArrowLeft') this.move(-1, 0, e.shiftKey);
+        if (e.key === 'ArrowRight') this.move(1, 0, e.shiftKey);
     }
 
     tapHandler(e) {
@@ -79,7 +79,7 @@ class Level extends React.Component {
         return blockSize;
     }
 
-    move(moveX, moveY) {
+    move(moveX, moveY, shiftKey) {
         if (this.state.gameDone) return; // Game is done
 
         // Find the player
@@ -96,6 +96,13 @@ class Level extends React.Component {
             if (blockTargetSpot === SUCC) return;
         }
 
+        // Cheat to pull blocks
+        let cheatMove = false;
+        if (shiftKey) {
+            const oppositeSpot = this.state.level[playerY - moveY][playerX - moveX];
+            cheatMove = oppositeSpot === BLCK || oppositeSpot === SUCC;
+        }
+
         let newLevel = [...this.state.level];
 
         // Move the player
@@ -108,6 +115,14 @@ class Level extends React.Component {
                 newBlockY = playerY + 2 * moveY;
             newLevel[newBlockY][newBlockX] = this.getNewBlockType(newBlockX, newBlockY);
         }
+
+        // Move the cheat block if needed
+        if (shiftKey && cheatMove) {
+            newLevel[playerY][playerX] = this.getNewBlockType(playerX, playerY);
+            newLevel[playerY - moveY][playerX - moveX] = this.whatToShowWherePlayerWas(playerX - moveX, playerY - moveY);
+        }
+
+        // Update the state
         this.setState({level: newLevel});
 
         // Check if game is won
